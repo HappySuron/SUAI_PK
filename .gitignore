@@ -1,0 +1,26 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Автоматически генерируемые файлы Unity
+sysinfo.txt
+*.stacktrace
+
+# Rider / VS / VSCode
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.user
+*.unityproj
+*.pidb
+*.booproj
+*.svd
+
+# OS файлы
+.DS_Store
+Thumbs.db
