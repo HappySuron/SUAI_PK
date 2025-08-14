@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     private bool isRotatingToTarget = false;
 
+    public static bool CanMove = true;
+
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!CanMove) return;
         HandleInput();
         HandleRotation();
         HandleInteraction();
