@@ -22,6 +22,8 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text npcTextPrefab;
     public TMP_Text choiceTextPrefab;
     public RectTransform contentArea;
+    public GameObject panel;
+
 
     // Метод для показа текста и вариантов выбора
     public void ShowTextWithChoices(string text, List<GreenCube.Choice> choices)
@@ -46,9 +48,24 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void ShowDiologWindow()
+    {
+        panel.SetActive(true);
+        PlayerController.CanMove = false;
+    }
+
+    public void HideDiologWindow()
+    {
+        ClearContent();
+        panel.SetActive(false);
+        PlayerController.CanMove = true;
+    }
+
+
     private void ClearContent()
     {
         foreach (Transform child in contentArea)
-            Destroy(child.gameObject);
+            //if (child.gameObject.GetComponent<ChoiceClickHandler>() != null)
+                    Destroy(child.gameObject);
     }
 }
