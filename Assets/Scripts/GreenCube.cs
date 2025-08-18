@@ -19,7 +19,7 @@ public class GreenCube : Interactable
     private void ShowNodeInitial()
     {
         
-        this.AddTextBlock("Куб <b>стоит</b>, а ты <i>смотришь</i>. Куб <color=green>зеленый</color>\n");
+        this.AddTextBlock("Куб <b>стоит</b>, а ты <i>смотришь</i>. Куб <color=green>зеленый</color>\n\n\n");
         this.currentChoices = new List<Choice>
         {
             new Choice("1. Привет куб", ShowNodeHello),
