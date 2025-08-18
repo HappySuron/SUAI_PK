@@ -4,61 +4,57 @@ using System.Collections.Generic;
 public class GreenCube : Interactable
 {
     // Структура для варианта выбора
-    public class Choice
-    {
-        public string text;
-        public System.Action action;
 
-        public Choice(string t, System.Action a)
-        {
-            text = t;
-            action = a;
-        }
-    }
 
     // Текущий текст
-    private string currentText;
-    // Текущие варианты выбора
-    private List<Choice> currentChoices;
+
 
     public override void Interact()
     {
         base.Interact();
+        DialogueManager.Instance.ShowDiologWindow();
         ShowNodeInitial();
     }
 
     private void ShowNodeInitial()
     {
-        currentText = "Куб стоит";
-        currentChoices = new List<Choice>
+        
+        this.AddTextBlock("Куб <b>стоит</b>, а ты <i>смотришь</i>. Куб <color=green>зеленый</color>\n");
+        this.currentChoices = new List<Choice>
         {
-            new Choice("Привет куб", ShowNodeHello),
-            new Choice("Куб ты отстой", ShowNodeBad)
+            new Choice("1. Привет куб", ShowNodeHello),
+            new Choice("2. Куб ты отстой", ShowNodeBad)
         };
 
-        DialogueManager.Instance.ShowTextWithChoices(currentText, currentChoices);
+        DialogueManager.Instance.ShowTextWithChoices(GetFullText(), currentChoices);
     }
 
     private void ShowNodeHello()
     {
-        currentText = "Куб стоит";
+        Debug.Log("Said Hello to the cube");
+        AddTextBlock("Куб стоит");
         currentChoices = new List<Choice>
         {
-            new Choice("Привет куб", ShowNodeHello),
-            new Choice("Куб ты отстой", ShowNodeBad)
+            new Choice("1. Привет куб", ShowNodeHello),
+            new Choice("2. Куб ты отстой", ShowNodeBad)
         };
 
-        DialogueManager.Instance.ShowTextWithChoices(currentText, currentChoices);
+        DialogueManager.Instance.ShowTextWithChoices(GetFullText(), currentChoices);
     }
 
     private void ShowNodeBad()
     {
-        currentText = "Куб отстой";
+        Debug.Log("Said FU to cube");
+        AddTextBlock("Куб отстой");
         currentChoices = new List<Choice>
         {
-            new Choice("Оставить куб", ShowNodeInitial)
+            new Choice("1. Оставить куб", () =>
+            {
+                // при выборе сразу выходим
+                DialogueManager.Instance.HideDiologWindow();
+            })
         };
 
-        DialogueManager.Instance.ShowTextWithChoices(currentText, currentChoices);
+        DialogueManager.Instance.ShowTextWithChoices(GetFullText(), currentChoices);
     }
 }

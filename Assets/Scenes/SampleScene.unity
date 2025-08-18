@@ -940,7 +940,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionPoint: {fileID: 1310384593}
   shouldRotateTowards: 1
-  startNode: {fileID: 11400000, guid: f3e4c179df9177041b96abaf102c32da, type: 2}
 --- !u!65 &505340787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1946,11 +1945,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ca9aac903620f40be90c21854cd23c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contentArea: {fileID: 1605117080}
-  autoScroller: {fileID: 773772977}
   npcTextPrefab: {fileID: 1905934692738829979, guid: d2f8ae4f06652f548809ea609373ff94, type: 3}
   choiceTextPrefab: {fileID: 1905934692738829979, guid: fdd0502a7566b304fade389e2e72f117, type: 3}
-  dialoguePanel: {fileID: 773772972}
+  contentArea: {fileID: 1605117080}
+  panel: {fileID: 773772972}
 --- !u!4 &1064101507
 Transform:
   m_ObjectHideFlags: 0
