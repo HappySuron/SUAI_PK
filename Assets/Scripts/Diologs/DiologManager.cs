@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class DialogueManager : MonoBehaviour
@@ -25,6 +26,13 @@ public class DialogueManager : MonoBehaviour
     public GameObject panel;
 
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    //public AudioClip defaultDialogueClip; // звук по умолчанию
+    public AudioClip[] dialogueClips; 
+    public bool randomizePitch = true;    // чтобы звучало "живее"
+    public Vector2 pitchRange = new Vector2(0.9f, 1.1f);
+
     // Метод для показа текста и вариантов выбора
     public void ShowTextWithChoices(string text, List<GreenCube.Choice> choices)
     {
@@ -33,6 +41,8 @@ public class DialogueManager : MonoBehaviour
         // Показываем текст NPC
         TMP_Text npcLine = Instantiate(npcTextPrefab, contentArea);
         npcLine.text = text;
+
+        PlayDialogueSound();
 
         // Показываем кнопки выбора
         foreach (var choice in choices)
@@ -46,6 +56,8 @@ public class DialogueManager : MonoBehaviour
                 choice.action.Invoke(); // выполняем действие выбора
             });
         }
+        Canvas.ForceUpdateCanvases();
+        panel.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
     }
 
     public void ShowDiologWindow()
@@ -65,7 +77,22 @@ public class DialogueManager : MonoBehaviour
     private void ClearContent()
     {
         foreach (Transform child in contentArea)
-            //if (child.gameObject.GetComponent<ChoiceClickHandler>() != null)
-                    Destroy(child.gameObject);
+            Destroy(child.gameObject);
+        //if (child.gameObject.GetComponent<ChoiceClickHandler>() != null)
+
+    }
+    
+    private void PlayDialogueSound()
+    {
+        if (audioSource == null || dialogueClips == null || dialogueClips.Length == 0) return;
+
+        if (randomizePitch)
+            audioSource.pitch = Random.Range(pitchRange.x, pitchRange.y);
+        else
+            audioSource.pitch = 1f;
+
+        // Берём случайный клип из списка
+        AudioClip clip = dialogueClips[Random.Range(0, dialogueClips.Length)];
+        audioSource.PlayOneShot(clip);
     }
 }
